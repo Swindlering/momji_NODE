@@ -1,0 +1,33 @@
+{
+  "name": "momji_node",
+  "version": "1.0.0",
+  "description": "une mini API REST avec output en json",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "rest",
+    "api",
+    "sequelize",
+    "mariadb"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Swindlering/momji_NODE.git"
+  },
+  "author": "tguidi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Swindlering/momji_NODE/issues"
+  },
+  "homepage": "https://github.com/Swindlering/momji_NODE#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mariadb": "^2.5.4",
+    "sequelize": "^6.6.5"
+  }
+}
