@@ -1,7 +1,10 @@
+const moment = require('moment');
+
 module.exports = (sequelize, Sequelize) => {
   const Employee = sequelize.define("employee", {
     id: {
-      type: Sequelize.STRING
+      type: Sequelize.STRING,
+      primaryKey: true,
     },
     firstName: {
       type: Sequelize.STRING

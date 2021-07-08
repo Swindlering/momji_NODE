@@ -1,11 +1,13 @@
+const uuid = require('uuid');
 const db = require("../models");
 const Employee = db.employees;
 const Op = db.Sequelize.Op;
 
+
 // Create and Save a new Employee
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body.firstName && !req.body.lastName ) {
+  if (!req.body.firstName && !req.body.lastName) {
     res.status(400).send({
       message: "Firstname and lastname can not be empty!"
     });
@@ -14,6 +16,7 @@ exports.create = (req, res) => {
 
   // Create an Employee
   const employee = {
+    id: uuid.v1(),
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -29,7 +32,7 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Employee:" + employee.firstName + " " + employee.lastName 
+          err.message || "Some error occurred while creating the Employee:" + employee.firstName + " " + employee.lastName
       });
     });
 };
@@ -37,7 +40,7 @@ exports.create = (req, res) => {
 // Retrieve all Employees from the database.
 exports.findAll = (req, res) => {
   // TO DO add filter name and email with req
-  
+
   Employee.findAll({})
     .then(data => {
       res.send(data);
@@ -66,7 +69,7 @@ exports.findOne = (req, res) => {
     });
 };
 
-// Update a Employee by the id in the request
+// Update an employee by the id in the request
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -92,7 +95,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Delete a Employee with the specified id in the request
+// Delete an employee with the specified id in the request
 exports.delete = (req, res) => {
   const id = req.params.id;
 

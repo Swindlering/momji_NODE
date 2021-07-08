@@ -64,7 +64,7 @@ exports.findOne = (req, res) => {
       {
         model: Employee,
         as: "employees",
-        attributes: ["id", "firstName","lastName", "email", "adresse"],
+        attributes: ["id", "firstName", "lastName", "email", "adresse"],
         through: {
           attributes: [],
         }
@@ -111,7 +111,7 @@ exports.update = (req, res) => {
     });
 };
 
-// Add a Employee by the id in the request
+// Add an employee by the id in the request
 exports.addEmployee = (req, res) => {
   const idTeam = req.params.idTeam;
   const idEmployee = req.params.idEmployee;
@@ -129,14 +129,43 @@ exports.addEmployee = (req, res) => {
         team.addEmployee(employee);
         console.log(`>> added Employee id=${employee.id} to Team id=${team.id}`);
         res.send({
-          message: `${employee.name} was add to Team ${team.name}`
+          message: `${employee.firstName} ${employee.lastName} was add to Team ${team.name}`
         });
       });
     })
     .catch(err => {
       console.log(">> Error while adding an Employee to Team: ", err);
       res.status(500).send({
-        message: "Error updating Team by addind employee with id=" + idEmployee
+        message: "Error updating Team by adding employee with id=" + idEmployee
+      });
+    });
+};
+// Remove an Employee by the id in the request
+exports.removeEmployee = (req, res) => {
+  const idTeam = req.params.idTeam;
+  const idEmployee = req.params.idEmployee;
+
+  Team.findByPk(idTeam)
+    .then((team) => {
+      if (!team) {
+        throw new Error('Team not found!');
+      }
+      return Employee.findByPk(idEmployee).then((employee) => {
+        if (!employee) {
+          throw new Error("Employee not found!");
+        }
+
+        team.removeEmployee(employee);
+        console.log(`>> Removed Employee id=${employee.id} to Team id=${team.id}`);
+        res.send({
+          message: `${employee.firstName} ${employee.lastName} was remove to Team ${team.name}`
+        });
+      });
+    })
+    .catch(err => {
+      console.log(">> Error while removing an Employee to Team: ", err);
+      res.status(500).send({
+        message: "Error updating Team by Removing employee with id=" + idEmployee
       });
     });
 };
