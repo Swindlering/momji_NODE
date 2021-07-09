@@ -7,14 +7,14 @@ npm install
 
 ### Run
 ```
-node server.js
+npm start
 ```
-## MYSQL INSTALL
+## MARIADB INSTALL
 ```
 sudo apt install mariadb-server
 ```
 
-## MYSQL USER
+## MARIADB USER
 ```
 CREATE USER 'momji'@'localhost' IDENTIFIED BY 'password';
 
